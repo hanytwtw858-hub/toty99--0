@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عالمكِ المشع والأنيق ✨</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- حاوية مطر النيون الخلفي المتساقط -->
+    <div id="neon-rain"></div>
+
+    <!-- الصفحة 1: البوابة النيون التفاعلية -->
+    <div id="page1" class="page active">
+        <div class="card-icon neon-text-purple pulse-animation">🔐</div>
+        <h1 class="main-title neon-text-pink">بوابة العالم السري</h1>
+        <p class="subtitle">اكتبي تاريخ ميلادك المميز (يوم وشهر) لتشغيل طاقة النيون ✨</p>
+        <div class="input-box">
+            <input type="text" id="birthdate" placeholder="مثال: 01/08 أو 1 اغسطس">
+            <button class="action-btn neon-btn-pink" onclick="checkDate()">اشعاع الألوان 🚀</button>
+        </div>
+        <p id="error-msg" class="error-text">التاريخ مش مظبوط، فكري تاني! 😉</p>
+    </div>
+
+    <!-- الصفحة 2: عداد العمر ولعبة البلالين -->
+    <div id="page2" class="page">
+        <div class="card-icon neon-text-pink pulse-animation">🎂</div>
+        <h1 class="main-title neon-text-purple">كل سنة وأنتي طيبة ي رينا !</h1>
+        <p class="subtitle">  ي احلي و اشطر رينا انتي وجودك مبهج لكل الناس اللي حواليكي كل يوم وجودك بيضف معني للحياه  :</p>
+        
+        <div class="counter-container">
+            <div class="counter-item"><span id="days-count">...</span>يوم</div>
+            <div class="counter-item"><span id="hours-count">...</span>ساعة</div>
+            <div class="counter-item"><span id="mins-count">...</span>دقيقة</div>
+        </div>
+
+        <p class="game-instruction">🎈 فرقعي البلالين المشعة دي :</p>
+        <div class="bubble-game">
+            <div class="game-bubble float-animation-1" onclick="popBubble(this, 'شخصيه طيبة بتساعد كل الناس اللي حواليها🌸')">🎈</div>
+            <div class="game-bubble float-animation-2" onclick="popBubble(this, ' انسانه متفاهمه طيوبه جدا✨')">🎈</div>
+            <div class="game-bubble float-animation-3" onclick="popBubble(this, 'أجدع وأحن صديقه في الدنيا 🤗')">🎈</div>
+        </div>
+        <div id="bubble-text" class="bubble-text-display"></div>
+
+        <button class="action-btn neon-btn-purple" onclick="nextPage(3)">افتحي صندوق الذكريات ➔</button>
+    </div>
+
+    <!-- الصفحة 3: خزنة الذكريات اللطيفة -->
+    <div id="page3" class="page">
+        <div class="card-icon neon-text-pink pulse-animation">🎁</div>
+        <h1 class="main-title neon-text-pink">خزنة التفاصيل </h1>
+        <p class="subtitle">اضغطي على أي كارت هدية   ✨</p>
+        
+        <div class="memory-grid">
+            <div class="memory-card card-bounce" onclick="openMemory(this, 'بنتنا الفرفوشه دايما اللي  ، طريقتها في الكلام وروحها الإيجابية مفيش منها اتنين.')">🛍️ فكي العقدة</div>
+            <div class="memory-card card-bounce" onclick="openMemory(this, 'سديقتي الددعة اللي دايماً بتحلي التفاصيل بوجودها، .')">💎 اكشفي السر</div>
+        </div>
+        <div id="memory-text" class="typewriter-box"></div>
+
+        <button class="action-btn neon-btn-pink" onclick="nextPage(4)"> رسالتي ليكي ➔</button>
+    </div>
+
+    <!-- الصفحة 4: الرسالة الغامضة ذات الكتابة الحية -->
+    <div id="page4" class="page">
+        <div class="card-icon neon-text-purple pulse-animation">💌</div>
+        <h1 class="main-title neon-text-purple">الرسالة السحرية المغلقة</h1>
+        <p class="subtitle">اضغطي ...</p>
+        
+        <div class="envelope pulse-light" id="envelope-btn" onclick="openLetter()">🔓 افتحي الجواب</div>
+        <div id="letter-text" class="typewriter-box long-text"></div>
+
+        <button id="nav-to-wish" class="action-btn neon-btn-pink" style="display: none;" onclick="nextPage(5)">وصلنا لآخر حاجة.. أمنيتك ✨ ➔</button>
+    </div>
+
+    <!-- الصفحة 5: صندوق الأمنيات السري المشع -->
+    <div id="page5" class="page">
+        <div class="card-icon neon-text-pink pulse-animation">🌟</div>
+        <h1 class="main-title neon-text-pink">أمنية عيد ميلادك المشعة</h1>
+        <p class="subtitle">غمضي عينيكي، اتمني أمنية واكتبيها هنا.. الأمنية دي متشفرة   😉</p>
+        
+        <!-- عند الضغط على الزر، سيتم إرسال الأمنية والانتقال التلقائي للأنيميشن الختامي -->
+        <form action="https://formspree.io" method="POST" id="wish-form" onsubmit="submitWish(event)">
+            <textarea name="u_wish" rows="4" placeholder="اكتبي إللي نفسك فيه هنا بكل حرية..." required></textarea>
+            <button type="submit" class="action-btn neon-btn-purple">إرسال الأمنية السحرية 🌟</button>
+        </form>
+    </div>
+
+    <!-- الصفحة 6: المفاجأة الختامية الكبرى (أنيميشن الخط الكبير) -->
+    <div id="page6" class="full-screen-page">
+        <div class="giant-neon-container">
+            <h1 class="giant-text neon-pulse-fast">كل سنة وأنتي طيبة يا مارينا  ❤️</h1>
+            <p class="giant-sub-text">وعقبال مليون سنة سعيدة ومحققة فيها كل أحلامك  بلس اللون دا عجبني  كسلت اعمل الوان تاني✨</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
